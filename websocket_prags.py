@@ -8,13 +8,12 @@ from itertools import islice
 import httpx
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from starlette.websockets import WebSocketState
-
+from fastapi.middleware.cors import CORSMiddleware
 from new_helper import *
 
 # Constants
 api_key = os.getenv("OPENAI_API_KEY")
 TRANSCRIPTION_URL = "https://api.openai.com/v1/audio/transcriptions"
-
 RATE = 16000
 CHANNELS = 1
 SAMPLE_WIDTH = 2
@@ -27,6 +26,15 @@ MAX_BUFFER_SIZE = RATE * 30 * SAMPLE_WIDTH  # 30 seconds max buffer
 client_histories = {}
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 
 @app.websocket("/ws/audio")

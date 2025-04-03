@@ -99,7 +99,7 @@ You are a transcript analysis assistant. You will receive a conversation transcr
 Your job is to analyze the transcript and return the following details in a single valid JSON response:
 
 1. **Name and Cabin**:
-    - Extract guest's cabin number. Example --> even if cabin **11542** is said as eleven thousand five hundred forty two, return 11542.
+    - Extract guest's cabin number. Example --> even if cabin **11542** is said as eleven thousand five hundred forty two, return 11542. 
     - Extract guest's first name and last name if mentioned.
     - If not mentioned, return null for those fields.
 
@@ -201,7 +201,7 @@ async def process_transcript(transcript):
     issues_dict = {
         issue["issueTypeDesc"].strip().lower(): {
             "priorityDesc": issue["priorityDesc"],
-            "issueGroupDesc": issue.get("issueGroupDesc"),
+            "issueGroupDesc": issue.get("issueGroupDesc"),  
             "level1DepartmentDesc": issue.get("level1DepartmentDesc"),
             "issueTypeId": issue.get("issueTypeId"),
         }
